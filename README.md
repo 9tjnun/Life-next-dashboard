@@ -1,4 +1,4 @@
-# Life Next Dashboard v10.5 — Build Safe Thai
+# Life Next Dashboard v10.6 — Lightweight Thai
 
 ## แก้ล่าสุด
 - ปฏิทินเปลี่ยนจากเส้นยาวรก ๆ เป็น tag สีเล็ก ๆ ในช่องวัน
@@ -45,7 +45,7 @@ life-next-dashboard@0.10.0-compact-calendar-tags-thai
 - หน้าแรกใช้ logic เดียวกับปฏิทิน
 
 
-## v10.5 Update — Build Safe Thai
+## v10.6 Update — Lightweight Thai
 - Verified local `npm run build` passes on Next.js 16.2.6.
 - Restored valid `tsconfig.json` JSON structure with `@/*` path alias.
 - Confirmed `postcss.config.mjs` exports a valid default config.

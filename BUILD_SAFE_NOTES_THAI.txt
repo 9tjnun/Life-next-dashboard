@@ -1,15 +1,13 @@
-Life Next Dashboard v10.5 — Build Safe Thai
+Life Next Dashboard v10.6 Lightweight Thai
 
-สถานะ:
-- ทดสอบ npm run build ผ่านแล้วบน Next.js 16.2.6
-- แก้ version label เป็น v10.5
-- tsconfig.json เป็น JSON ถูกต้อง พร้อม alias @/*
-- postcss.config.mjs export default ถูกต้อง
-- API AI/Supabase ยัง disabled ใน planner mode เพื่อไม่ให้ Vercel build พังจาก import ที่ยังไม่มี
-- localStorage keys ยังใช้ v10 เดิม เพื่อให้ข้อมูลเดิมใน browser ไม่หาย
+แก้สำหรับ Vercel npm install error:
+- ลบ package-lock.json ออก เพื่อไม่ให้ Vercel ใช้ lockfile ที่มี registry path จากเครื่องสร้างไฟล์
+- ลบ dependency ที่ยังไม่ใช้ตอนนี้: openai, @supabase/supabase-js
+- เพิ่ม .npmrc บังคับใช้ public npm registry
+- ยังเป็น planner/dashboard localStorage mode เหมือนเดิม
 
-วิธีใช้:
-1. แตก zip
-2. อัปโหลด/แทนที่ไฟล์ใน repo GitHub
-3. commit และ deploy ใหม่ใน Vercel
-4. ถ้า Vercel ยัง error ให้เช็กว่า repo ไม่ได้เหลือไฟล์เก่า เช่น app/api/generate/*, lib/openaiClient.ts, lib/security.ts ที่มาจากเวอร์ชัน AI เก่า
+วิธีอัปโหลด GitHub:
+1) ลบไฟล์เก่าใน repo ให้สะอาดก่อน
+2) อัปโหลด app, components, lib และไฟล์ root ทั้งหมดจากโฟลเดอร์นี้
+3) ห้ามอัป package-lock.json เพราะเวอร์ชันนี้ตั้งใจไม่มี
+4) ใน Vercel ใช้ Install Command: npm install --no-audit --no-fund
