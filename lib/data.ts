@@ -5,28 +5,15 @@ export const channelLinks = {
   facebook: "https://www.facebook.com/LifeNextChapter/"
 };
 
-export type PlatformKey =
-  | "facebook"
-  | "youtube"
-  | "reels"
-  | "etsy"
-  | "pinterest"
-  | "kdp"
-  | "lifeetsy"
-  | "ebook"
-  | "product"
-  | "neutral";
+export type PlatformKey = "facebook" | "youtube" | "etsy" | "pinterest" | "kdp" | "product" | "neutral";
 
 export const platformMeta: Record<PlatformKey, { label: string; short: string; color: string; soft: string; dot: string; full: string }> = {
   facebook: { label: "Facebook", short: "FB", color: "text-fb", soft: "bg-fbSoft", dot: "bg-fb", full: "bg-fb text-white" },
   youtube: { label: "YouTube", short: "YT", color: "text-yt", soft: "bg-ytSoft", dot: "bg-yt", full: "bg-yt text-white" },
-  reels: { label: "Reels", short: "Reels", color: "text-yt", soft: "bg-ytSoft", dot: "bg-yt", full: "bg-yt text-white" },
-  etsy: { label: "ByeTension Etsy", short: "Etsy", color: "text-etsy", soft: "bg-etsySoft", dot: "bg-etsy", full: "bg-etsy text-white" },
+  etsy: { label: "Etsy", short: "Etsy", color: "text-etsy", soft: "bg-etsySoft", dot: "bg-etsy", full: "bg-etsy text-white" },
   pinterest: { label: "Pinterest", short: "Pin", color: "text-pin", soft: "bg-pinSoft", dot: "bg-pin", full: "bg-pin text-white" },
   kdp: { label: "KDP", short: "KDP", color: "text-kdp", soft: "bg-kdpSoft", dot: "bg-kdp", full: "bg-kdp text-white" },
-  lifeetsy: { label: "Life Next Etsy", short: "LN Etsy", color: "text-product", soft: "bg-productSoft", dot: "bg-product", full: "bg-product text-white" },
-  ebook: { label: "Ebook", short: "Ebook", color: "text-seasonal", soft: "bg-seasonalSoft", dot: "bg-seasonal", full: "bg-seasonal text-white" },
-  product: { label: "Product Work", short: "Prod", color: "text-product", soft: "bg-productSoft", dot: "bg-product", full: "bg-product text-white" },
+  product: { label: "Product", short: "Prod", color: "text-product", soft: "bg-productSoft", dot: "bg-product", full: "bg-product text-white" },
   neutral: { label: "General", short: "Gen", color: "text-muted", soft: "bg-neutralSoft", dot: "bg-slate-400", full: "bg-slate-500 text-white" }
 };
 
@@ -35,225 +22,29 @@ export type TaskTemplate = {
   platform: PlatformKey;
   title: string;
   detail: string;
-  thaiTime: string;
-  note?: string;
 };
 
-export type DayPlan = {
+const dailyCore: TaskTemplate[] = [
+  { id: "facebook-post", platform: "facebook", title: "Facebook post", detail: "ลงแคปชั่นพักใจ 1 โพสต์" },
+  { id: "etsy-5", platform: "etsy", title: "Etsy 5 listings", detail: "ลง ByeTension 5 listings เวลา 21:30" },
+  { id: "pinterest-pins", platform: "pinterest", title: "Pinterest pins", detail: "ลง 3–5 pins" }
+];
+
+export const weeklyTemplate: {
   dayIndex: number;
   day: string;
   focus: string;
   morning: string;
   night: string;
   tasks: TaskTemplate[];
-};
-
-const dailyCore: TaskTemplate[] = [
-  {
-    id: "byetension-etsy-daily",
-    platform: "etsy",
-    title: "ByeTension: ลง 5 listings",
-    detail: "ลงวอลอาร์ทใน Etsy ร้าน ByeTension วันละ 5 listings",
-    thaiTime: "21:30 ไทย"
-  },
-  {
-    id: "pinterest-daily",
-    platform: "pinterest",
-    title: "Pinterest: ลง 3–5 pins",
-    detail: "ลง pins เพื่อดันทราฟฟิกไป Etsy / KDP / Product",
-    thaiTime: "21:00–00:00 ไทย"
-  },
-  {
-    id: "facebook-daily",
-    platform: "facebook",
-    title: "Facebook: โพสต์พักใจ 1 โพสต์",
-    detail: "แคปชั่นคนแก่พักใจ / slow life / cozy home",
-    thaiTime: "23:00 ไทย",
-    note: "ตั้ง schedule ล่วงหน้าได้"
-  }
-];
-
-const youtubeReels: TaskTemplate[] = [
-  {
-    id: "youtube-short",
-    platform: "youtube",
-    title: "YouTube Shorts",
-    detail: "ลง Shorts 1 คลิป",
-    thaiTime: "04:00–06:00 ไทย วันถัดไป",
-    note: "ควรตั้ง schedule ล่วงหน้า ไม่ต้องตื่นมาลง"
-  },
-  {
-    id: "facebook-reels",
-    platform: "reels",
-    title: "Facebook Reels",
-    detail: "ใช้คลิปเดียวกับ YouTube Shorts แล้วลง Reels",
-    thaiTime: "05:00–07:00 ไทย วันถัดไป",
-    note: "ลงพร้อมรอบ Shorts ได้ หรือห่าง 30–60 นาที"
-  }
-];
-
-const lifeNextEtsyListing: TaskTemplate = {
-  id: "life-next-etsy-listing",
-  platform: "lifeetsy",
-  title: "Life Next Etsy Printable",
-  detail: "ลงสินค้า printable / checklist / planner / activity PDF",
-  thaiTime: "ศุกร์ 21:00 ไทย",
-  note: "เริ่มต้น 1 listing/สัปดาห์; ถ้าพร้อมค่อยเพิ่มเป็น 2 listings/สัปดาห์"
-};
-
-const kdpMidCycle: TaskTemplate = {
-  id: "kdp-mid-cycle",
-  platform: "kdp",
-  title: "KDP Mid-Cycle / Production Check",
-  detail: "เช็กความคืบหน้า Planner / Brain Game / Activity Book รอบกลางเดือน",
-  thaiTime: "09:00–14:30 ไทย",
-  note: "KDP ขึ้น 2 ช่อง/เดือน: วันที่ 14 และ 28"
-};
-
-const kdpPublishCycle: TaskTemplate = {
-  id: "kdp-publish-cycle",
-  platform: "kdp",
-  title: "KDP Publish / Final QA",
-  detail: "ตรวจไฟล์ final, export PDF, upload / publish prep",
-  thaiTime: "09:00–14:30 ไทย",
-  note: "รอบ publish ทุก 2 สัปดาห์หลังระบบนิ่ง"
-};
-
-const ebookMonthly: TaskTemplate = {
-  id: "ebook-monthly-milestone",
-  platform: "ebook",
-  title: "Ebook / Mini Guide Monthly Milestone",
-  detail: "งาน Ebook เดือนละ 1 เล่ม: outline / draft / layout / proof",
-  thaiTime: "09:00–14:30 ไทย",
-  note: "Ebook ขึ้น 1 ช่อง/เดือนเท่านั้น"
-};
-
-const weeklyReview: TaskTemplate = {
-  id: "weekly-review",
-  platform: "neutral",
-  title: "Weekly Review",
-  detail: "เช็กงานค้าง เติม stock วางแผนสัปดาห์หน้า",
-  thaiTime: "อาทิตย์ 21:00–22:00 ไทย"
-};
-
-function thaiDayName(dayIndex: number) {
-  return ["อาทิตย์", "จันทร์", "อังคาร", "พุธ", "พฤหัส", "ศุกร์", "เสาร์"][dayIndex];
-}
-
-function baseFocus(dayIndex: number) {
-  if ([3, 5, 0].includes(dayIndex)) return "Daily Core + Shorts/Reels";
-  if (dayIndex === 5) return "Daily Core + Life Next Etsy";
-  if (dayIndex === 0) return "Daily Core + Weekly Review";
-  return "Daily Core";
-}
-
-export function getDayPlan(date: Date = new Date()): DayPlan {
-  const dayIndex = date.getDay();
-  const dayOfMonth = date.getDate();
-
-  const tasks: TaskTemplate[] = [...dailyCore];
-
-  // YouTube Shorts + Reels: Wednesday / Friday / Sunday
-  if ([3, 5, 0].includes(dayIndex)) {
-    tasks.push(...youtubeReels);
-  }
-
-  // Life Next Etsy Printable: Friday only, 1 listing/week initially
-  if (dayIndex === 5) {
-    tasks.push(lifeNextEtsyListing);
-  }
-
-  // KDP: exactly 2 slots/month
-  if (dayOfMonth === 14) {
-    tasks.push(kdpMidCycle);
-  }
-  if (dayOfMonth === 28) {
-    tasks.push(kdpPublishCycle);
-  }
-
-  // Ebook: exactly 1 slot/month
-  if (dayOfMonth === 21) {
-    tasks.push(ebookMonthly);
-  }
-
-  // Weekly review: Sunday
-  if (dayIndex === 0) {
-    tasks.push(weeklyReview);
-  }
-
-  const specialFocus = [
-    dayOfMonth === 14 ? "KDP Mid-Cycle" : "",
-    dayOfMonth === 21 ? "Ebook Monthly Milestone" : "",
-    dayOfMonth === 28 ? "KDP Publish / Final QA" : ""
-  ].filter(Boolean).join(" + ");
-
-  return {
-    dayIndex,
-    day: thaiDayName(dayIndex),
-    focus: specialFocus || baseFocus(dayIndex),
-    morning:
-      dayOfMonth === 14 || dayOfMonth === 28
-        ? "KDP / Planner / Brain Game check"
-        : dayOfMonth === 21
-          ? "Ebook / Mini Guide milestone"
-          : "ผลิตคอนเทนต์ / เตรียมรูป / เตรียม listing",
-    night: "ลง ByeTension + Pinterest + Facebook ตามเวลาไทย",
-    tasks
-  };
-}
-
-export const weeklyTemplate: DayPlan[] = [0, 1, 2, 3, 4, 5, 6].map((dayIndex) => ({
-  dayIndex,
-  day: thaiDayName(dayIndex),
-  focus: baseFocus(dayIndex),
-  morning: "ผลิตคอนเทนต์ / เตรียมรูป / เตรียม listing",
-  night: "ลง ByeTension + Pinterest + Facebook ตามเวลาไทย",
-  tasks: getDayPlan(new Date(2026, 5, dayIndex === 0 ? 7 : dayIndex)).tasks
-}));
-
-export const cycleRules = [
-  {
-    name: "ByeTension Wall Art",
-    frequency: "ทุกวัน",
-    thaiTime: "21:30 ไทย",
-    detail: "ลง Etsy ร้าน ByeTension วันละ 5 listings"
-  },
-  {
-    name: "Pinterest",
-    frequency: "ทุกวัน",
-    thaiTime: "21:00–00:00 ไทย",
-    detail: "ลง 3–5 pins/day"
-  },
-  {
-    name: "Facebook Post",
-    frequency: "ทุกวัน",
-    thaiTime: "23:00 ไทย",
-    detail: "1 cozy post/day"
-  },
-  {
-    name: "YouTube Shorts + Reels",
-    frequency: "3 วัน/สัปดาห์",
-    thaiTime: "YT 04:00–06:00 / Reels 05:00–07:00 ไทย วันถัดไป",
-    detail: "พุธ / ศุกร์ / อาทิตย์, ตั้ง schedule ล่วงหน้า"
-  },
-  {
-    name: "Life Next Etsy Printable Shop",
-    frequency: "1 listing/สัปดาห์ เริ่มต้น",
-    thaiTime: "ศุกร์ 21:00 ไทย",
-    detail: "พอสินค้าเยอะค่อยเพิ่มเป็น อังคาร + ศุกร์"
-  },
-  {
-    name: "KDP Planner / Brain Game / Activity Book",
-    frequency: "2 ช่อง/เดือน",
-    thaiTime: "วันที่ 14 และ 28 · 09:00–14:30 ไทย",
-    detail: "รอบกลางเดือน = production check, วันที่ 28 = final QA / publish prep"
-  },
-  {
-    name: "Ebook / Mini Guide",
-    frequency: "1 ช่อง/เดือน",
-    thaiTime: "วันที่ 21 · 09:00–14:30 ไทย",
-    detail: "เดือนละ 1 เล่ม ไม่ใช่งานรายวัน"
-  }
+}[] = [
+  { dayIndex: 1, day: "จันทร์", focus: "Wall Art + Full Platform Day", morning: "ทำ wall art / mockup / SEO / เตรียม listing", night: "ลง ByeTension 5 listings เวลา 21:30 + บันทึกงาน", tasks: [...dailyCore, { id: "youtube-short", platform: "youtube", title: "YouTube Short", detail: "ลง Shorts 1 คลิป หรือเตรียมคลิป" }, { id: "kdp-work", platform: "kdp", title: "KDP / book work", detail: "ทำ activity book / planner 5–10 หน้า" }] },
+  { dayIndex: 2, day: "อังคาร", focus: "Activity Book / Product", morning: "ทำหน้า activity book 5–10 หน้า หรือวางธีมเล่ม", night: "ลง Etsy 5 listings + จด record", tasks: [...dailyCore, { id: "kdp-work", platform: "kdp", title: "KDP / book work", detail: "ทำ Cozy Brain Games หรือ activity book" }] },
+  { dayIndex: 3, day: "พุธ", focus: "Shorts + Reels", morning: "เตรียม short video / เลือกภาพ / ทำ caption", night: "ลง Shorts 1 คลิป + Reels + Etsy 5 listings", tasks: [...dailyCore, { id: "youtube-short", platform: "youtube", title: "YouTube Short", detail: "ลง Shorts 1 คลิป" }] },
+  { dayIndex: 4, day: "พฤหัส", focus: "Planner / Checklist", morning: "ทำ checklist หรือ planner printable 1 ชิ้น", night: "ลง Etsy 5 listings + บันทึก record", tasks: [...dailyCore, { id: "product-printable", platform: "product", title: "Printable work", detail: "ทำ checklist หรือ planner printable 1 ชิ้น" }] },
+  { dayIndex: 5, day: "ศุกร์", focus: "QA + Shorts", morning: "ตรวจไฟล์ SEO mockup listing package", night: "ลง Shorts 1 คลิป + Etsy 5 listings", tasks: [...dailyCore, { id: "youtube-short", platform: "youtube", title: "YouTube Short", detail: "ลง Shorts 1 คลิป" }, { id: "qa-files", platform: "product", title: "QA files", detail: "ตรวจไฟล์ / SEO / mockup" }] },
+  { dayIndex: 6, day: "เสาร์", focus: "Batch + Distribute", morning: "งานเบา / จัด Pinterest batch ถ้ามีแรง", night: "ลง Etsy 5 listings + Facebook post", tasks: [...dailyCore, { id: "batch-content", platform: "product", title: "Batch content", detail: "เตรียม stock คอนเทนต์ล่วงหน้า" }] },
+  { dayIndex: 0, day: "อาทิตย์", focus: "Review + Plan", morning: "รีวิวสัปดาห์ / เติม stock ที่ใกล้หมด", night: "เตรียมแผนสัปดาห์หน้า + Etsy 5 listings", tasks: [...dailyCore, { id: "youtube-short", platform: "youtube", title: "YouTube Short", detail: "ลง Shorts หรือเตรียมคลิปสัปดาห์หน้า" }, { id: "weekly-review", platform: "kdp", title: "Weekly review", detail: "เช็ก KDP/Product/Planner pipeline" }] }
 ];
 
 export const seasonalGuide = [
@@ -276,7 +67,7 @@ export const projectMap = [
   { project: "Life Next Chapter", channels: "Facebook + YouTube Shorts", role: "แบรนด์แม่ / ห้องนั่งเล่นของแบรนด์", whatToDo: "ลงคอนเทนต์พักใจ slow life คนแก่พักใจ และวิดีโอ mood สั้น ๆ", platform: "facebook" as PlatformKey },
   { project: "Cozy Brain Games", channels: "KDP + Etsy ร้านใหม่ในอนาคต", role: "สมุดเกมฝึกสมอง / activity book", whatToDo: "ทำหนังสือธีมเดียวต่อเล่ม เช่น Flower Garden, Tea Time, Travel Memories", platform: "kdp" as PlatformKey },
   { project: "Life Next Planner", channels: "KDP + Etsy ร้านใหม่ในอนาคต", role: "planner / journal / checklist", whatToDo: "ทำ planner, checklist, journal และ printable bundle สำหรับชีวิตช้าลง/เกษียณ", platform: "product" as PlatformKey },
-  { project: "Life Next Guides", channels: "KDP + Etsy PDF", role: "ebook / mini guide / workbook", whatToDo: "ทำคู่มือสั้น ๆ เช่น retirement lifestyle, cozy living, hobby after retirement", platform: "ebook" as PlatformKey }
+  { project: "Life Next Guides", channels: "KDP + Etsy PDF", role: "ebook / mini guide / workbook", whatToDo: "ทำคู่มือสั้น ๆ เช่น retirement lifestyle, cozy living, hobby after retirement", platform: "neutral" as PlatformKey }
 ];
 
 export const defaultStockTargets = { facebookDailyNeed: 1, youtubeWeeklyNeed: 3, etsyDailyNeed: 5, pinterestDailyNeed: 5 };

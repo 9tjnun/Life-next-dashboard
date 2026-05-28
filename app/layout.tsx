@@ -3,8 +3,8 @@ import "./globals.css";
 import { Sidebar } from "@/components/sidebar";
 
 export const metadata: Metadata = {
-  title: "Life Next Planner v10.5.5",
-  description: "Compact calendar tag planner"
+  title: "Life Next Planner v10.8",
+  description: "Stable Next 14 Thai dashboard planner"
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

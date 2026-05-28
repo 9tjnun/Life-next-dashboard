@@ -1,0 +1,26 @@
+Life Next Dashboard v10.8 — Stable Next 14 Thai
+
+แก้เพื่อให้ Vercel build นิ่งกว่าเดิม:
+- ย้อนจาก Next 16.2.6 เป็น Next 14.2.23 ที่ stable กว่า
+- ย้อนจาก React 19 เป็น React 18.2.0
+- ตัด dependency ที่ยังไม่ใช้ใน planner mode: OpenAI และ Supabase
+- เพิ่ม engines node 22.x ใน package.json
+- เพิ่ม .nvmrc = 22
+- เพิ่ม .npmrc เพื่อลดปัญหา npm install
+- เพิ่ม vercel.json เพื่อบังคับ install/build command
+
+โครงเว็บยังคงจาก v10 compact calendar tags:
+- Dashboard / Today report
+- Calendar + recurring schedule
+- Facebook records
+- YouTube records
+- Etsy / Pinterest / KDP / Product / Seasonal / Guide / Settings
+- localStorage record system
+- Thai planner direction
+
+วิธีอัป:
+1. แตก zip
+2. อัปของข้างในขึ้น GitHub root
+3. ห้ามอัป zip ทั้งก้อน
+4. GitHub root ควรมี app, components, lib, package.json, tsconfig.json, next.config.mjs, postcss.config.mjs, tailwind.config.ts, vercel.json, .npmrc, .nvmrc
+5. ห้ามมีไฟล์ page.tsx / route.ts / ui.tsx / sidebar.tsx ลอยหน้า root

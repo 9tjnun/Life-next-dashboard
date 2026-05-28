@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { Card, MiniCard, Pill } from "@/components/ui";
-import { defaultStockTargets, seasonalGuide, platformMeta, getDayPlan } from "@/lib/data";
+import { defaultStockTargets, seasonalGuide, weeklyTemplate, platformMeta } from "@/lib/data";
 import { FacebookRecord, keys, ProductRecord, YoutubeRecord, loadArray, loadObject, CalendarDoneMap } from "@/lib/storage";
 
 function todayKey() { return new Date().toISOString().slice(0, 10); }
 function getThaiDate() { return new Intl.DateTimeFormat("th-TH", { dateStyle: "full" }).format(new Date()); }
-function getWeekTemplate(date = new Date()) { return getDayPlan(date); }
+function getWeekTemplate(date = new Date()) { return weeklyTemplate.find((d) => d.dayIndex === date.getDay()) || weeklyTemplate[0]; }
 
 export function TodayDashboard() {
   const [facebook, setFacebook] = useState<FacebookRecord[]>([]);
@@ -69,9 +69,7 @@ export function TodayDashboard() {
                     <Pill className={done ? "bg-kdp text-white" : "bg-neutralSoft text-muted"}>{done ? "เสร็จแล้ว" : "รอทำ"}</Pill>
                   </div>
                   <p className="mt-1 text-sm font-semibold text-ink">{t.title}</p>
-                  <p className="mt-1 text-xs font-semibold text-ink/80">{t.thaiTime}</p>
                   <p className="mt-1 text-xs leading-4 text-muted">{t.detail}</p>
-                  {t.note && <p className="mt-1 text-[11px] leading-4 text-muted">{t.note}</p>}
                 </div>
               );
             })}

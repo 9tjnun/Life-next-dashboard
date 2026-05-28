@@ -21,7 +21,7 @@ export function Sidebar() {
     <aside className="sticky top-0 h-screen w-60 overflow-y-auto border-r border-line bg-panel p-4">
       <div className="mb-4 rounded-2xl bg-ink p-4 text-white">
         <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">Life Next</p>
-        <h1 className="mt-1 text-lg font-semibold">Planner v10.5</h1>
+        <h1 className="mt-1 text-lg font-semibold">Planner v10</h1>
         <p className="mt-1 text-xs font-medium leading-5 text-slate-300">Compact calendar tags</p>
       </div>
       <nav className="space-y-1.5">

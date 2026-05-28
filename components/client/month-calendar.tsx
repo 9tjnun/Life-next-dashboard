@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useEffect } from "react";
 import { Card, Pill, Button } from "@/components/ui";
-import { seasonalGuide, platformMeta, PlatformKey, getDayPlan } from "@/lib/data";
+import { seasonalGuide, weeklyTemplate, platformMeta, PlatformKey } from "@/lib/data";
 import { CalendarDoneMap, keys, loadObject, saveObject } from "@/lib/storage";
 import { ChevronLeft, ChevronRight, CheckCircle2 } from "lucide-react";
 
@@ -16,7 +16,7 @@ function isoLocal(d: Date) {
   return `${y}-${m}-${day}`;
 }
 function weekTemplateFor(date: Date) {
-  return getDayPlan(date);
+  return weeklyTemplate.find((x) => x.dayIndex === date.getDay()) || weeklyTemplate[0];
 }
 
 function tagClass(platform: PlatformKey) {
@@ -26,9 +26,6 @@ function tagClass(platform: PlatformKey) {
     case "etsy": return "bg-etsySoft text-etsy border-etsy/20";
     case "pinterest": return "bg-pinSoft text-pin border-pin/20";
     case "kdp": return "bg-kdpSoft text-kdp border-kdp/20";
-    case "reels": return "bg-ytSoft text-yt border-yt/20";
-    case "lifeetsy": return "bg-productSoft text-product border-product/20";
-    case "ebook": return "bg-seasonalSoft text-seasonal border-seasonal/20";
     case "product": return "bg-productSoft text-product border-product/20";
     default: return "bg-neutralSoft text-muted border-line";
   }
@@ -66,13 +63,6 @@ export function MonthCalendar() {
 
   function toggleTask(dateKey: string, taskId: string) {
     const next = { ...doneMap, [dateKey]: { ...(doneMap[dateKey] || {}), [taskId]: !(doneMap[dateKey]?.[taskId]) } };
-    setDoneMap(next);
-    saveObject(keys.calendarDone, next);
-  }
-
-  function clearSelectedDay() {
-    const next = { ...doneMap };
-    delete next[selectedKey];
     setDoneMap(next);
     saveObject(keys.calendarDone, next);
   }
@@ -142,13 +132,8 @@ export function MonthCalendar() {
       </Card>
 
       <Card title="รายละเอียดวันที่เลือก">
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <p className="text-xs font-medium text-muted">วันที่เลือก</p>
-            <h2 className="mt-1 text-2xl font-semibold text-ink">{new Intl.DateTimeFormat("th-TH", { dateStyle: "full" }).format(selected)}</h2>
-          </div>
-          <Button variant="light" onClick={clearSelectedDay}>Clear all</Button>
-        </div>
+        <p className="text-xs font-medium text-muted">วันที่เลือก</p>
+        <h2 className="mt-1 text-2xl font-semibold text-ink">{new Intl.DateTimeFormat("th-TH", { dateStyle: "full" }).format(selected)}</h2>
         <div className="mt-3 rounded-2xl bg-neutralSoft p-3">
           <p className="text-sm font-semibold text-ink">{selectedTemplate.day} · {selectedTemplate.focus}</p>
           <p className="mt-1 text-xs leading-5 text-muted"><b>เช้า:</b> {selectedTemplate.morning}</p>
@@ -166,9 +151,7 @@ export function MonthCalendar() {
                     <span className={`rounded-md px-2 py-1 text-xs font-semibold ${done ? "bg-neutralSoft text-muted line-through" : tagClass(task.platform)}`}>{meta.short}</span>
                     <div className="min-w-0">
                       <p className="text-sm font-semibold text-ink">{task.title}</p>
-                      <p className="text-xs font-semibold leading-5 text-ink/80">{task.thaiTime}</p>
                       <p className="text-xs leading-5 text-muted">{task.detail}</p>
-                      {task.note && <p className="text-[11px] leading-4 text-muted">{task.note}</p>}
                     </div>
                   </div>
                   <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border ${done ? "border-kdp bg-kdp" : "border-line bg-white"}`}>

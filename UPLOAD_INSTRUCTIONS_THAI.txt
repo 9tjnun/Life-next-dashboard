@@ -1,11 +1,11 @@
-วิธีอัปเดต v10.4
+วิธีอัปเดต v10
 
 1. แตก zip
-2. เปิดเข้าไปในโฟลเดอร์ life-next-dashboard-v10-4-monthly-kdp-ebook-fix-thai
+2. เปิดเข้าไปในโฟลเดอร์ life-next-dashboard-v10-compact-calendar-tags-thai
 3. ลากไฟล์และโฟลเดอร์ข้างในทั้งหมดไปอัปโหลดทับ GitHub repo เดิม
 4. Commit changes
 5. รอ Vercel build ใหม่
 
 เช็กว่าอัปสำเร็จ:
 Vercel build log ต้องขึ้น:
-life-next-dashboard@0.10.4-monthly-kdp-ebook-fix-thai
+life-next-dashboard@0.10.0-compact-calendar-tags-thai
