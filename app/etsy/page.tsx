@@ -1,0 +1,5 @@
+import { PageHeader, Card, ExternalCard, MiniCard } from "@/components/ui";
+import { channelLinks } from "@/lib/data";
+export default function EtsyPage() {
+  return <div className="space-y-4"><PageHeader eyebrow="Etsy" title="Etsy = ร้านขายไฟล์" desc="ByeTension ลงวอลอาร์ทวันละ 5 listings เวลา 21:30 ไม่ต้องกรอกราย listing ในเว็บ ใช้หน้า Calendar ติ๊กงานพอ" /><ExternalCard href={channelLinks.etsy} title="เปิด Etsy ByeTension" desc="ร้านจริง" className="border-l-4 border-l-etsy" /><div className="grid gap-3 md:grid-cols-3"><MiniCard label="เป้าหมาย" value="5" note="listings/วัน" className="border-l-4 border-l-etsy" /><MiniCard label="เวลา" value="21:30" note="อัปโหลดทุกวัน" className="border-l-4 border-l-etsy" /><MiniCard label="Record" value="Calendar" note="ติ๊กในหน้าปฏิทิน" /></div><Card title="Project Context"><p className="text-sm font-medium leading-6 text-muted"><b className="text-ink">ByeTension</b> = ร้านวอลอาร์ท / printable wall art / ใช้ Etsy ขายหลัก และ Pinterest ดันทราฟฟิก ส่วน Life Next Printable Shop ค่อยเปิดเมื่อมีสินค้า 5–10 ชิ้น</p></Card></div>
+}

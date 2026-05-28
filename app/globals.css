@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --background: #f6f7fb; --foreground: #172033; }
+
+html, body { min-height: 100%; }
+
+body {
+  background:
+    radial-gradient(circle at 8% 4%, rgba(66, 103, 178, 0.055), transparent 26rem),
+    radial-gradient(circle at 92% 8%, rgba(184, 50, 100, 0.04), transparent 28rem),
+    #f6f7fb;
+  color: var(--foreground);
+}
+
+* { box-sizing: border-box; }
+a { color: inherit; }
+button, input, textarea, select { font: inherit; }
